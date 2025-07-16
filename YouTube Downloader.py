@@ -2,6 +2,29 @@ import os
 from yt_dlp import YoutubeDL
 from tkinter import Tk, Label, Entry, Button, filedialog, messagebox, Radiobutton, StringVar, OptionMenu
 
+def show_help():
+    """Show help information about bot detection bypass"""
+    help_text = """YouTube Bot Detection Bypass Help
+
+Browser Cookies Options:
+• Auto: Try Chrome → Firefox → Edge → Safari automatically
+• Chrome: Use Chrome browser cookies only
+• Firefox: Use Firefox browser cookies only  
+• Edge: Use Edge browser cookies only
+• Safari: Use Safari browser cookies only
+• None: Download without browser cookies
+
+Tips for best results:
+1. Make sure you're signed into YouTube in your browser
+2. Visit the video URL in your browser first
+3. Use 'Auto' for best compatibility
+4. If one browser fails, try another
+
+The downloader will automatically handle bot detection
+and retry with different methods if needed."""
+    
+    messagebox.showinfo("Help - Bot Detection Bypass", help_text)
+
 def download_video():
     url = url_entry.get()
     if not url:
@@ -105,7 +128,7 @@ def download_video():
 
 # Setup the GUI
 root = Tk()
-root.title("YouTube Video/Shorts Downloader")
+root.title("YouTube Downloader - Bot Detection Bypass")
 
 # Create and place GUI elements
 Label(root, text="YouTube URL:").grid(row=0, column=0, padx=10, pady=10)
@@ -120,6 +143,8 @@ Radiobutton(root, text="Audio", variable=format_choice, value="audio").grid(row=
 # Browser choice for cookie extraction (bot detection bypass)
 browser_choice = StringVar(value="auto")
 Label(root, text="Browser Cookies:").grid(row=2, column=0, padx=10, pady=10, sticky='w')
+browser_frame = Button(root, text="?", command=show_help, width=2)
+browser_frame.grid(row=2, column=2, padx=5, pady=10)
 browser_menu = OptionMenu(root, browser_choice, "auto", "chrome", "firefox", "edge", "safari", "none")
 browser_menu.grid(row=2, column=1, padx=10, pady=10, sticky='w')
 
@@ -131,6 +156,6 @@ audio_quality_menu.grid(row=3, column=1, padx=10, pady=10, sticky='w')
 
 # Download button
 download_button = Button(root, text="Download", command=download_video)
-download_button.grid(row=4, column=0, columnspan=2, pady=20)
+download_button.grid(row=4, column=0, columnspan=3, pady=20)
 
 root.mainloop()
