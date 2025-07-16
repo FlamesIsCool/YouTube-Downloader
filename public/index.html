@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>YouTube Downloader</h1>
+            <p>Download YouTube videos in MP4 or MP3 format</p>
+        </header>
+
+        <main>
+            <div class="download-form">
+                <div class="input-group">
+                    <label for="youtube-url">YouTube URL:</label>
+                    <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." required>
+                </div>
+
+                <div class="format-selection">
+                    <h3>Select Format:</h3>
+                    <div class="format-options">
+                        <label class="format-option">
+                            <input type="radio" name="format" value="mp4" checked>
+                            <span class="radio-custom"></span>
+                            MP4 (Video)
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="mp3">
+                            <span class="radio-custom"></span>
+                            MP3 (Audio Only)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quality-selection">
+                    <div id="video-quality" class="quality-group">
+                        <label for="video-quality-select">Video Quality:</label>
+                        <select id="video-quality-select">
+                            <option value="720p">720p (HD)</option>
+                            <option value="480p">480p</option>
+                            <option value="360p">360p</option>
+                            <option value="best">Best Available</option>
+                        </select>
+                    </div>
+
+                    <div id="audio-quality" class="quality-group" style="display: none;">
+                        <label for="audio-quality-select">Audio Bitrate:</label>
+                        <select id="audio-quality-select">
+                            <option value="128">128 kbps</option>
+                            <option value="192">192 kbps</option>
+                            <option value="320">320 kbps</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="download-btn" class="download-button">
+                    <span class="btn-text">Download</span>
+                    <div class="btn-loader" style="display: none;"></div>
+                </button>
+            </div>
+
+            <div id="video-info" class="video-info" style="display: none;">
+                <img id="video-thumbnail" alt="Video thumbnail">
+                <div class="video-details">
+                    <h3 id="video-title"></h3>
+                    <p id="video-duration"></p>
+                    <p id="video-uploader"></p>
+                </div>
+            </div>
+
+            <div id="progress-container" class="progress-container" style="display: none;">
+                <h3>Download Progress</h3>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="progress-text">Preparing download...</p>
+            </div>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div id="success-message" class="success-message" style="display: none;"></div>
+        </main>
+
+        <footer>
+            <p>YouTube Downloader - Download videos responsibly and respect copyright laws</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
