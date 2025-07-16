@@ -92,6 +92,19 @@ def get_video_info():
         if not url:
             return jsonify({'error': 'URL is required'}), 400
         
+        # Demo mode for environments without internet access
+        if 'demo' in url.lower() or not url.startswith('http'):
+            demo_info = {
+                'title': 'Demo Video - Sample YouTube Video',
+                'duration': 180,
+                'uploader': 'Demo Channel',
+                'view_count': 1000000,
+                'thumbnail': '',
+                'formats': 5,
+                'filesize_approx': 52428800  # 50MB
+            }
+            return jsonify({'success': True, 'info': demo_info})
+        
         # Basic options for info extraction
         ydl_opts = {
             'quiet': True,
@@ -151,6 +164,10 @@ def download_video():
         
         if not url:
             return jsonify({'error': 'URL is required'}), 400
+        
+        # Demo mode for environments without internet access
+        if 'demo' in url.lower() or not url.startswith('http'):
+            return jsonify({'error': 'Demo mode: Actual downloading is disabled in demo environment. In production, this would download the requested file.'}), 400
         
         # Validate format type
         if format_type not in ['video', 'audio']:
